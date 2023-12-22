@@ -1,27 +1,13 @@
-# Latest
+#The First Commit - Sidemenu with Tailwind
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1.Create new angle project 
+2.create home page and add route to models 
+3.Create a sidenav component for side menu bar 
+4.Includes selector in app component 
+5.Install tailwind with postCSS and auto prefixed 
+6.cmd npx tailwind init -p for
+Create tailwind CSS config file
+Created postCSS config file
+7.add tailwind.css in angular.json
+8.Change the tailwin.com factor JS
+9.Then use the side menu with angler animations and tell wind side name
