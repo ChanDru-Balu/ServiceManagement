@@ -1,1 +1,67 @@
-<p>listing works!</p>
+<p>Listing works!</p>
+
+
+
+
+<!-- table -->
+
+<!-- <table class="table-auto w-full">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">
+          <input type="checkbox" (change)="toggleAllSelection()">
+        </th>
+        <th class="px-4 py-2" (click)="sortBy('id')">ID</th>
+        <th class="px-4 py-2" (click)="sortBy('name')">Name</th>
+        <th class="px-4 py-2" (click)="sortBy('email')">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data ">
+        <td class="px-4 py-2">
+          <input type="checkbox" [checked]="selected.includes(item.id)" (change)="onItemSelected(item)">
+        </td>
+        <td class="px-4 py-2">{{ item.id }}</td>
+        <td class="px-4 py-2">{{ item.name }}</td>
+        <td class="px-4 py-2">{{ item.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="flex justify-between mt-4">
+    </div>
+  
+  <input type="text" class="form-input" placeholder="Filter..." [(ngModel)]="filterText">
+   -->
+  
+
+
+   <div class="container mx-auto p-4">
+    <table class="min-w-full border border-gray-300 divide-y divide-gray-300">
+      <!-- Table Header -->
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" (click)="sortBy(column)">
+            {{ column }}
+          </th>
+        </tr>
+      </thead>
+      <!-- Table Body -->
+      <tbody>
+        <tr *ngFor="let item of pagedData">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.email }}</td>
+          <!-- Add more columns as needed -->
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination Controls -->
+    <div class="mt-4">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span class="mx-2">{{ currentPage }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  
