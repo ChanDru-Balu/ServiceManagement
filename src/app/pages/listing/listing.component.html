@@ -1,20 +1,38 @@
 <p>Listing works!</p>
 
 
-
-
-
-
-
-
 <!-- table -->
 
 <!-- table With Angular Material -->
+<section class="example-section">
+    <mat-checkbox class="example-margin">Check me!</mat-checkbox>
+  </section>
+  
+<mat-table  [dataSource]="dataSource" matSort>
+   
+      <!-- Checkbox Column -->
+  <!-- <ng-container matColumnDef="select">
+    <mat-header-cell mat-header-cell mat-sort-header *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container> -->
 
-<mat-table [dataSource]="dataSource" matSort>
+  
   <!-- ID Column -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+  <ng-container matColumnDef="id" >
+    <mat-checkbox class="example-margin">Check me!</mat-checkbox>
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="hide-arrow">ID</mat-header-cell>
     <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
   </ng-container>
 
@@ -26,7 +44,7 @@
 
   <!-- Email Column -->
   <ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header="false">Email</mat-header-cell>
     <mat-cell *matCellDef="let row">{{ row.email }}</mat-cell>
   </ng-container>
 
@@ -34,7 +52,21 @@
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+<!-- <div style="display: flex; align-items: center; justify-content: space-between;">
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+    </mat-paginator>
+
+    <div style="display: flex; align-items: center;">
+        <mat-form-field>
+            <input matInput [(ngModel)]="goToPage">
+        </mat-form-field>
+        <button mat-button (click)="updateGoToPage()">Go</button>
+    </div>
+
+</div> -->
+
+
 
 
 

@@ -2,11 +2,10 @@ import { AfterViewInit, Component , OnInit, ViewChild } from '@angular/core';
 import { catchError, of, switchMap } from 'rxjs';
 import { JobsService } from 'src/app/services/jobs.service';
 
+import {SelectionModel} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-
 
 
 @Component({
@@ -18,27 +17,28 @@ export class ListingComponent implements OnInit , AfterViewInit {
 
   data : any = [
     { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
-    { id: 1, name: 'Alice', email: 'alice@example.com' },
+    { id: 2, name: 'dvsvds', email: 'raj@example.com' },
+    { id: 3, name: 'bgbdf', email: 'adca@example.com' },
+    { id: 4, name: 'bndfbd', email: 'aliacdcdce@example.com' },
+    { id: 5, name: 'dvsxvx', email: 'sdsdv@example.com' },
+    { id: 6, name: 'rtnrtn', email: 'resdv@example.com' },
+    { id: 7, name: 'nfgbfd', email: 'vdsv@example.com' },
+    { id: 8, name: 'yrdbfbfd', email: 'svdsv@example.com' },
+    { id: 9, name: 'dbfd', email: 'ewfcas@example.com' },
+    { id: 10, name: 'dbdfb', email: 'svsdv@example.com' },
+    { id: 11, name: 'dbfdb', email: 'ewdsczx@example.com' },
+    { id: 12, name: 'cxvbxc', email: 'dcwdesd@example.com' },
   ];
-  
+
   displayedColumns: string[] = ['id', 'name', 'email'];
   dataSource = new MatTableDataSource<any>(this.data);
+  selection = new SelectionModel<any>(true, this.data.filter((t:any)=> t.id));
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
  
-
+  goToPage : any = null;
   jobsData : any ;
   jobsArray : any[] = [];
   metaArray : any[] = [];
@@ -56,6 +56,37 @@ export class ListingComponent implements OnInit , AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
+
+      /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+    /** The label for the checkbox on the passed row */
+    checkboxLabel(row?: any): string {
+      if (!row) {
+        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+      }
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    }
+
+  updateGoToPage() {
+
+    this.paginator.pageIndex = this.goToPage - 1;
   }
 
   getJobs(type:any){

@@ -1,0 +1,20 @@
+:host .mat-paginator .mat-paginator-container{
+    justify-content: flex-start !important;
+  }
+
+  mat-header-row{
+    background-color: #f8fafc;
+  }
+
+  mat-header-cell{
+    color:#64748b
+  }
+
+  ::ng-deep .hide-arrow .mat-sort-header-arrow {
+    color: #64748b;
+ }
+
+mat-cell {
+    background-color: #ffffff;
+    color: #182032;
+}
