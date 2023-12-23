@@ -1,13 +1,25 @@
-#The First Commit - Sidemenu with Tailwind
+# Tailwind CSS Side Menu
 
-1.Create new angle project 
-2.create home page and add route to models 
-3.Create a sidenav component for side menu bar 
-4.Includes selector in app component 
-5.Install tailwind with postCSS and auto prefixed 
-6.cmd npx tailwind init -p for
-Create tailwind CSS config file
-Created postCSS config file
-7.add tailwind.css in angular.json
-8.Change the tailwin.com factor JS
-9.Then use the side menu with angler animations and tell wind side name
+1. **Create a New Angular Project**
+
+2. **Create Home Page and Add Routes to Modules**
+
+
+3. **Create a SideNav Component for Side Menu Bar**
+
+4. **Include Selector in App Component**
+
+5. **Install Tailwind with PostCSS and Auto-prefixed**
+
+6. **cmd npx tailwind init -p for**
+
+    ***Create tailwind CSS config file**
+    
+    ***Created postCSS config file**
+
+7. **Add Tailwind CSS in angular.json**
+
+8. **Change the Tailwind Config JS**
+
+9. **Use Side Menu with Angular Animations and Tailwind CSS Styles**
+
