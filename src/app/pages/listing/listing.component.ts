@@ -101,6 +101,9 @@ export class ListingComponent {
             return this.jobService.validateJson(error.error.text);
           }
         }
+        if(error.status == 429 ){
+          console.log("The Limit is Reached!")
+        }
         throw error; // Re-throw to display default error message if needed
       }),
       switchMap((data) => {
