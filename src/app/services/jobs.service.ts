@@ -11,12 +11,23 @@ export class JobsService {
 
   constructor(private http: HttpClient) {}
 
-  getJobs() {
-    return this.http.get(`https://zuper.free.beeceptor.com/jobs`);
+  getJobs(type: any) {
+    if(type == 'online'){
+     return this.http.get(`https://zuper.free.beeceptor.com/jobs`);
+    }
+    else{ 
+      return this.http.get(`assets/json/jobs.json`);
+    }
   }
 
-  getJobsMeta() {
-    return this.http.get(`https://zuper.free.beeceptor.com/jobs/meta`);
+  getJobsMeta(type: any) {
+    if(type == 'online'){
+      return this.http.get(`https://zuper.free.beeceptor.com/jobs/meta`);
+     }
+     else{ 
+       return this.http.get(`assets/json/meta.json`);
+     }
+    
   }
 
   validateJson(data: any) {
