@@ -4,6 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator'
 import {MatSort} from '@angular/material/sort';
 
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -64,10 +67,15 @@ export class SettingsComponent implements AfterViewInit {
   per_page: any = 10;
   page_no: any = this.page_index+1;
   jumpToPage?: any;
-
+  selected = 'all';
+  filterText: any ;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   ELEMENT_DATA: PeriodicElement[] | undefined = ELEMENT_DATA;
+
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
+    this.matIconRegistry.addSvgIcon('custom_icon', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/funnel.svg'))
+  }
 
  ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -97,6 +105,14 @@ export class SettingsComponent implements AfterViewInit {
       });
       
     // });
+  }
+
+  applyFilter(ev:any){
+    console.log({ev})
+  }
+
+  clearFilter(){
+    this.filterText="";
   }
 
 

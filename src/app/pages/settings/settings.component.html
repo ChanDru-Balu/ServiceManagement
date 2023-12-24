@@ -1,4 +1,70 @@
 <div class="mat-elevation-z8">
+
+    <!-- <div style="background-color: #f1f5f9;display:flex;justify-content:flex-end;min-height:29px;"> -->
+        <!-- <mat-select style="line-height: 20px; 
+        outline: none;
+        border: solid 2px #d3dbe5;
+        border-radius: 4px;
+        background-color: #ffffff;
+        width: 25%;
+        margin: 15px;
+        padding: 2px 5px;"
+         [(ngModel)]="selected">
+          <mat-option value="all">All</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select> -->
+
+        <!-- <mat-form-field  appearance="outline" style="padding: 0px;background-color:#ffffff;max-height:29px;">
+            <button class="search-icon" style="width: 10px;margin-left:5px;background-color:#ffffff;" matPrefix mat-icon-button disabled>
+                <mat-icon>search</mat-icon>
+              </button>
+            <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterText" style="background-color:#ffffff;" placeholder="visit" #input>
+            <button mat-icon-button matSuffix style="width: 10px;margin-right:5px;background-color:#ffffff;" [disabled]="!filterText" (click)="clearFilter()" style="margin-top: 1px;">
+                <mat-icon>cancel</mat-icon>
+              </button>
+          </mat-form-field> -->
+
+          <!-- <mat-form-field appearance="outline">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterText" #input />
+            <button mat-icon-button matSuffix *ngIf="filterText" (click)="clearFilter()" (click)="clearFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field> -->
+
+    <!-- </div> -->
+       
+    <div style="background-color: #f1f5f9; display: flex; justify-content: flex-end; min-height: 29px;">
+      <mat-form-field appearance="outline" style="padding: 0; background-color: #ffffff; max-height: 29px; margin: 15px;">
+        <button style="margin:5px" matPrefix  disabled>
+          <mat-icon>search</mat-icon>
+        </button>
+        <input matInput (keyup)="applyFilter($event)" placeholder="ID/Title/Zipcode..." [(ngModel)]="filterText" style="background-color: #ffffff; flex: 1; padding: 2px 5px; border: none; outline: none;">
+        <button style="margin-right:5px"  matSuffix [ngStyle]="(filterText) ? {'visibility': 'visible'} : {'visibility': 'hidden'}" (click)="clearFilter()" style="margin-left: 5px;">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div style="display: flex;align-items:center;padding:15px;">
+        <button mat-stroked-button style=" background-color: #ffffff; justify-content:center;" >
+          <mat-icon svgIcon="custom_icon"></mat-icon>
+          Filter
+        </button>
+      </div>
+
+      <div style="display: flex;align-items:center;padding-right:15px;">
+        <button mat-stroked-button style=" background-color: #ffffff; justify-content:center;" >
+          <mat-icon >settings</mat-icon>
+          Customize
+        </button>
+      </div>
+
+      
+    </div>
+    
+      
+
     <table mat-table [dataSource]="dataSource" matSort>
     
       <ng-container matColumnDef="select">
