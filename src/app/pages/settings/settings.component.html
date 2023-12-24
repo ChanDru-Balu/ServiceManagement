@@ -62,6 +62,16 @@
 
       
     </div>
+
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <!-- <div class="example-box" *ngFor="let movie of movies" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        {{movie}}
+      </div> -->
+      <div class="example-box" *ngFor="let movie of movies; let i = index" cdkDrag>
+        <mat-checkbox [(ngModel)]="checkedItems[i]">{{ movie }}</mat-checkbox>
+      </div>
+    </div>
     
       
 

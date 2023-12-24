@@ -7,6 +7,8 @@ import {MatSort} from '@angular/material/sort';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -72,9 +74,26 @@ export class SettingsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   ELEMENT_DATA: PeriodicElement[] | undefined = ELEMENT_DATA;
+  movies = [
+    'Episode I - The Phantom Menace',
+    'Episode II - Attack of the Clones',
+    'Episode III - Revenge of the Sith',
+    'Episode IV - A New Hope',
+    'Episode V - The Empire Strikes Back',
+    'Episode VI - Return of the Jedi',
+    'Episode VII - The Force Awakens',
+    'Episode VIII - The Last Jedi',
+    'Episode IX - The Rise of Skywalker',
+  ];
+  checkedItems: boolean[] = Array(this.movies.length).fill(false);
 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
     this.matIconRegistry.addSvgIcon('custom_icon', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/funnel.svg'))
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.checkedItems, event.previousIndex, event.currentIndex);
   }
 
  ngOnInit() {
