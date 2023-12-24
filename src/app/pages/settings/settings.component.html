@@ -43,11 +43,18 @@
     </table>
 
     <div style="display: flex; align-items: center;">
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        <mat-paginator 
+        [pageIndex]="page_index"
+        [pageSize]="page_index"
+        [pageSizeOptions]="[5, 10, 20]" 
+        showFirstLastButtons
+        ></mat-paginator>
+        
         <div style="flex: 1;"></div> <!-- This div will take up the remaining space -->
         <div style="display: flex; margin-right: 10px; align-items:center; ">
             <h4 style="margin: 10px; font-size: 12px;">Go To:</h4>
-            <input style="border: 1px solid #ccc; padding: 15px;width: 45px;height: 20px;">
+            <input (keydown.enter)="jumpTo()" [(ngModel)]="jumpToPage" style="border: 1px solid #ccc; padding: 10px;width: 45px;height: 20px;">
         </div>
     </div>
     

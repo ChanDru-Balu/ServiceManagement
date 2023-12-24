@@ -56,7 +56,28 @@ export class ListingComponent implements OnInit , AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+      // Customize the paginator label
+      this.paginator._intl.itemsPerPageLabel = 'Page';
+      this.paginator._intl.getRangeLabel = this.customRangeLabel.bind(this);
+
   }
+
+    // Custom range label function
+    customRangeLabel(page: number, pageSize: number, length: number): string {
+      if (length === 0 || pageSize === 0) {
+        return `Page 1 of 1`;
+      }
+  
+      length = Math.max(length, 0);
+  
+      const startIndex = page * pageSize;
+      const endIndex = startIndex < length
+        ? Math.min(startIndex + pageSize, length)
+        : startIndex + pageSize;
+  
+      return `Page ${page + 1} of ${Math.ceil(length / pageSize)}`;
+    }
 
   
     /** Whether the number of selected elements matches the total number of rows. */

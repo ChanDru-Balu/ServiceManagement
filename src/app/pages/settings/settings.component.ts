@@ -54,13 +54,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class SettingsComponent implements AfterViewInit {
   
+  
   // @ViewChild(MatPaginator) paginator: MatPaginator | any;
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
+  total: any = 10;
+  page_index: any = 0;
+  per_page: any = 10;
+  page_no: any = this.page_index+1;
+  jumpToPage?: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  ELEMENT_DATA: PeriodicElement[] | undefined = ELEMENT_DATA;
 
  ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -68,8 +75,54 @@ export class SettingsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+         // Customize the paginator label
+         this.paginator._intl.itemsPerPageLabel = 'Page';
+         this.paginator._intl.getRangeLabel = this.customRangeLabel.bind(this);
   }
 
+  loadPageData() {
+    const pageIndex = this.paginator.pageIndex;
+    console.log({pageIndex})
+    const pageSize = this.paginator.pageSize;
+    console.log({pageSize})
+
+      const startIndex = pageIndex * pageSize;
+      const endIndex = startIndex + pageSize;
+      setTimeout(() => {
+        const dataSlice: PeriodicElement[] = this.ELEMENT_DATA!.slice();
+    
+        this.dataSource.data = dataSlice;
+        console.log("Data loaded for page", pageIndex + 1);
+      });
+      
+    // });
+  }
+
+
+  onChangedPageSize(ev:any){
+    console.log({ev})
+  }
+
+   // Function to handle jump to page
+   jumpTo() {
+    console.log('JumpTo')
+    console.log(this.paginator)
+    console.log(this.jumpToPage && this.jumpToPage > 0 && this.jumpToPage <= this.paginator.getNumberOfPages())
+    if (this.jumpToPage && this.jumpToPage > 0 && this.jumpToPage <= this.paginator.getNumberOfPages()) {
+      this.paginator.pageIndex = this.jumpToPage - 1;
+      this.loadPageData()
+      // this.jumpToPage = null; // Reset the jumpToPage variable
+      // this.paginator.pageIndex = this.page_index, // number of the page you want to jump.
+      // this.paginator.page.next({      
+      //      pageIndex: this.page_index,
+      //      pageSize: this.paginator.pageSize,
+      //      length: this.paginator.length
+      //    });
+    }
+  }
+
+  
 
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -89,5 +142,24 @@ export class SettingsComponent implements AfterViewInit {
   logSelection() {
     this.selection.selected.forEach(s => console.log(s.name));
   }
+
+
+  // Custom range label function
+  customRangeLabel(page: number, pageSize: number, length: number): string {
+    if (length === 0 || pageSize === 0) {
+      return `Page 1 of 1`;
+    }
+
+    length = Math.max(length, 0);
+
+    const startIndex = page * pageSize;
+    const endIndex = startIndex < length
+      ? Math.min(startIndex + pageSize, length)
+      : startIndex + pageSize;
+
+    return `Page ${page + 1} of ${Math.ceil(length / pageSize)}`;
+  }
+
+  
 }
 
