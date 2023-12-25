@@ -6,7 +6,7 @@
                 "customer_last_name": "V",
                 "customer_email": "hello@sample.co",
                 "customer_first_name": "Charles",
-                "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba",
+                "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba"
             },
             "prefix": "Q3_0001",
             "assigned_to": [
@@ -20,13 +20,13 @@
                     "team": {
                         "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
                         "team_name": "Team Android"
-                    },
+                    }
                 }
             ],
             "job_title": "Visit for 123 V33",
             "job_category": {
                 "category_name": "Installation",
-                "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e",
+                "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e"
             },
             "job_priority": "LOW",
             "scheduled_start_time": "2023-10-30T14:09:00.000Z",
@@ -61,7 +61,7 @@
             "customer": {
                 "customer_last_name": "V",
                 "customer_first_name": "Charles",
-                "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba",
+                "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba"
             },
             "prefix": "Q3_0001",
             "assigned_to": [
@@ -139,14 +139,14 @@
             "scheduled_end_time": "2023-10-30T20:58:00.000Z",
             "current_job_status": {
                 "status_uid": "79d1d7ad-30e5-4deb-bbd2-61d7fec4507d",
-                "status_name": "Sent to Service Provider",
+                "status_name": "Sent to Service Provider"
             },
             "customer_address": {
                 "landmark": "",
                 "city": "Chennai",
                 "state": "Tamil Nadu",
                 "street": "Chennai International Airport (MAA), Airport Road, Meenambakkam",
-                "zip_code": "600027",
+                "zip_code": "600027"
             },
             "customer_billing_address": {
                 "landmark": "",
@@ -166,7 +166,7 @@
             "customer": {
                 "customer_uid": "fb684bf0-6da2-11ee-ad52-fb5442a7fc06",
                 "customer_first_name": "arunkumar",
-                "customer_last_name": "101",
+                "customer_last_name": "101"
             },
             "prefix": "Q3_0001",
             "assigned_to": [
@@ -306,7 +306,7 @@
             "job_title": "Visit for 123 V33",
             "job_category": {
                 "category_name": "Installation",
-                "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e",
+                "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e"
             },
             "job_priority": "LOW",
             "scheduled_start_time": "2023-10-30T14:09:00.000Z",

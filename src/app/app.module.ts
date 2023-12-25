@@ -24,7 +24,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
+import { PopoverModalComponent } from './popover-modal/popover-modal.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 // import {  } from '@angular/material'
 
 @NgModule({
@@ -33,7 +34,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     HomeComponent,
     SidemenuComponent,
     ListingComponent,
-    SettingsComponent
+    SettingsComponent,
+    PopoverModalComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatCheckboxModule,
     MatSelectModule,
     MatButtonModule,
-    DragDropModule
+    DragDropModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

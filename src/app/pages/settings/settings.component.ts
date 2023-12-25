@@ -8,6 +8,8 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { PopoverModalComponent } from 'src/app/popover-modal/popover-modal.component';
 
 export interface PeriodicElement {
   name: string;
@@ -59,10 +61,136 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class SettingsComponent implements AfterViewInit {
   
+  columns = [
+    {
+        "display_name": "Work Order Number",
+        "data_key": "work_order_number",
+        "data_type": "string",
+        "is_sortable": true,
+        "checked": true
+    },
+    {
+        "display_name": "Job Title",
+        "data_key": "job_title",
+        "data_type": "string",
+        "is_sortable": true,
+        "checked": true,
+        "combine_column": "{{prefix}} {{job_title}}",
+        "display_type": "title"
+    },
+    {
+        "display_name": "Customer",
+        "data_key": "customer",
+        "data_type": "string",
+        "is_sortable": true,
+        "checked": true,
+        "combine_column": "{{customer.customer_first_name}} {{customer.customer_last_name}}",
+        "display_type": "customer"
+    },
+    {
+        "display_name": "Employees Assigned",
+        "data_key": "assigned_to",
+        "data_type": "string",
+        "display_type": "assignment",
+        "is_sortable": false,
+        "checked": true
+    },        
+    {
+        "display_name": "Scheduled Date",
+        "data_key": "scheduled_start_time",
+        "data_type": "datetime",
+        "display_type": "scheduledDatetime",
+        "is_sortable": true,
+        "checked": true
+    },
+    {
+        "display_name": "Category",
+        "data_key": "job_category.category_name",
+        "data_type": "string",
+        "is_sortable": false,
+        "checked": true,
+        "display_type": "string"
+    },
+    {
+        "display_name": "Status",
+        "data_key": "current_job_status.status_type",
+        "data_type": "boolean",
+        "is_sortable": false,
+        "checked": true,
+        "display_type": "badge"
+    },
+    {
+        "display_name": "Priority",
+        "data_key": "job_priority",
+        "data_type": "string",
+        "display_type": "priority",
+        "is_sortable": true,
+        "checked": true
+    }
+]
+
+jobs =  [
+  {
+      "job_uid": "23a49af0-773b-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_last_name": "V",
+          "customer_email": "hello@sample.co",
+          "customer_first_name": "Charles",
+          "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba"
+      },
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "fea19530-406f-11e8-b99a-59f39b812a88",
+                  "first_name": "Henry",
+                  "last_name": "Jones",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/staging.in.pro.zuper/attachments/6c287db0-ff7c-11e7-b3a8-29b417a4f3fa/80894390-2125-11ee-9dcd-affe7f3e9b1d.jpg"
+              },
+              "team": {
+                  "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
+                  "team_name": "Team Android"
+              }
+          }
+      ],
+      "job_title": "Visit for 123 V33",
+      "job_category": {
+          "category_name": "Installation",
+          "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e"
+      },
+      "job_priority": "LOW",
+      "scheduled_start_time": "2023-10-30T14:09:00.000Z",
+      "scheduled_end_time": "2023-10-30T22:09:00.000Z",
+      "current_job_status": {
+          "status_uid": "79d1d7ad-30e5-4deb-bbd2-61d7fec4507d",
+          "status_name": "Sent to Service Provider"
+      },
+      "customer_address": {
+          "city": "New York",
+          "street": "Google, 8th Avenue",
+          "zip_code": "10011",
+          "first_name": "First",
+          "last_name": "Address",
+          "email": "hello@sample.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Salem",
+          "state": "Tamil Nadu",
+          "street": "Seelanaickenpatti",
+          "zip_code": "636201",
+          "first_name": "",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13619
+  }]
   
   // @ViewChild(MatPaginator) paginator: MatPaginator | any;
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+     // Extract the displayed column names
+  displayedColumns = ['select', ...this.columns.map(column => column.data_key)];
+  dataSource = new MatTableDataSource<any>(this.jobs);
   selection = new SelectionModel<PeriodicElement>(true, []);
   total: any = 10;
   page_index: any = 0;
@@ -74,25 +202,35 @@ export class SettingsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   ELEMENT_DATA: PeriodicElement[] | undefined = ELEMENT_DATA;
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX - The Rise of Skywalker',
-  ];
-  checkedItems: boolean[] = Array(this.movies.length).fill(false);
+  
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
+  checkedItems: boolean[] = Array(this.columns.length).fill(false);
+
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer,private dialog: MatDialog){
     this.matIconRegistry.addSvgIcon('custom_icon', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/funnel.svg'))
+    console.log("Displayed Columns:",this.displayedColumns)
+    console.log("Data:",this.columns)
+    console.log("Jobs:",this.jobs)
+
+  }
+
+  openPopoverModal() {
+    const dialogRef = this.dialog.open(PopoverModalComponent, {
+      width: '400px', // Adjust the width as per your design
+      height: '400px', // Adjust the height as per your design
+      data: {
+        columns : this.columns, // Pass your data here
+      }
+    },);
+  
+    // Subscribe to the afterClosed event if you want to handle anything when the modal is closed.
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Modal closed with result:', result);
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
     moveItemInArray(this.checkedItems, event.previousIndex, event.currentIndex);
   }
 
@@ -108,6 +246,11 @@ export class SettingsComponent implements AfterViewInit {
          this.paginator._intl.getRangeLabel = this.customRangeLabel.bind(this);
   }
 
+  checkValue(job: any,column: any,i:number): any {
+
+    console.log({job,i,column})
+  }
+
   loadPageData() {
     const pageIndex = this.paginator.pageIndex;
     console.log({pageIndex})
@@ -117,7 +260,7 @@ export class SettingsComponent implements AfterViewInit {
       const startIndex = pageIndex * pageSize;
       const endIndex = startIndex + pageSize;
       setTimeout(() => {
-        const dataSlice: PeriodicElement[] = this.ELEMENT_DATA!.slice();
+        const dataSlice: any[] = this.jobs!.slice();
     
         this.dataSource.data = dataSlice;
         console.log("Data loaded for page", pageIndex + 1);
