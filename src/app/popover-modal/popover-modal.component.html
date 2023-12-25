@@ -1,0 +1,10 @@
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let column of columns; let i = index" cdkDrag>
+      <mat-checkbox [(ngModel)]="column.checked">{{ column.display_name }}</mat-checkbox>
+    </div>
+  </div>
+
+  <div class="modal-buttons">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+  </div>

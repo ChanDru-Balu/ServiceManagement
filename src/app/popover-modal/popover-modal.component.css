@@ -1,0 +1,7 @@
+/* popover-modal.component.css */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
