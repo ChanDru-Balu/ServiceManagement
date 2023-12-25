@@ -1,5 +1,8 @@
 import {SelectionModel} from '@angular/cdk/collections';
 import {AfterViewInit, Component,ViewChild, ViewEncapsulation} from '@angular/core';
+import { catchError, of, switchMap } from 'rxjs';
+import { JobsService } from 'src/app/services/jobs.service';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator'
 import {MatSort} from '@angular/material/sort';
@@ -10,6 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { PopoverModalComponent } from 'src/app/popover-modal/popover-modal.component';
+import { ActivatedRoute } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -129,7 +133,7 @@ export class SettingsComponent implements AfterViewInit {
     }
 ]
 
-jobs =  [
+jobs =   [
   {
       "job_uid": "23a49af0-773b-11ee-af24-7515efe796bc",
       "customer": {
@@ -185,7 +189,494 @@ jobs =  [
           "email": ""
       },
       "work_order_number": 13619
-  }]
+  },
+  {
+      "job_uid": "0a762890-7732-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_last_name": "V",
+          "customer_first_name": "Charles",
+          "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba"
+      },
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "fea19530-406f-11e8-b99a-59f39b812a88",
+                  "first_name": "Henry",
+                  "last_name": "Jones",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/staging.in.pro.zuper/attachments/6c287db0-ff7c-11e7-b3a8-29b417a4f3fa/80894390-2125-11ee-9dcd-affe7f3e9b1d.jpg"
+              },
+              "team": {
+                  "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
+                  "team_name": "Team Android"
+              }
+          }
+      ],
+      "job_title": "Visit for 123 V33",
+      "job_category": {
+          "category_name": "Home Cleaning",
+          "category_uid": "3fee25f0-74a1-11ea-8ca5-df1d176880cb"
+      },
+      "job_priority": "LOW",
+      "scheduled_start_time": "2023-10-30T13:04:00.000Z",
+      "scheduled_end_time": "2023-10-30T14:09:00.000Z",
+      "current_job_status": {
+          "status_uid": "cc47f5b9-862f-400a-a13f-40c63ca65e2b",
+          "status_name": "New"
+      },
+      "customer_address": {
+          "city": "New York",
+          "street": "Google, 8th Avenue",
+          "zip_code": "10011",
+          "first_name": "First",
+          "last_name": "Address",
+          "email": "hello@sample.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Salem",
+          "state": "Tamil Nadu",
+          "street": "Seelanaickenpatti",
+          "zip_code": "636201",
+          "first_name": "",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13618
+  },
+  {
+      "job_uid": "18ccec90-7731-11ee-af24-7515efe796bc",
+      "customer": null,
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "fea19530-406f-11e8-b99a-59f39b812a88",
+                  "first_name": "Henry",
+                  "last_name": "Jones",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/staging.in.pro.zuper/attachments/6c287db0-ff7c-11e7-b3a8-29b417a4f3fa/80894390-2125-11ee-9dcd-affe7f3e9b1d.jpg"
+              },
+              "team": {
+                  "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
+                  "team_name": "Team Android"
+              }
+          }
+      ],
+      "job_title": "Visit for Org ",
+      "job_category": {
+          "category_name": "Installation",
+          "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e"
+      },
+      "job_priority": "LOW",
+      "scheduled_start_time": "2023-10-30T12:58:00.000Z",
+      "scheduled_end_time": "2023-10-30T20:58:00.000Z",
+      "current_job_status": {
+          "status_uid": "79d1d7ad-30e5-4deb-bbd2-61d7fec4507d",
+          "status_name": "Sent to Service Provider"
+      },
+      "customer_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "Chennai International Airport (MAA), Airport Road, Meenambakkam",
+          "zip_code": "600027"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "Turyaa Chennai, Old Mahabalipuram Road, Elango Nagar, Perungudi",
+          "zip_code": "600041",
+          "first_name": "Amika ",
+          "last_name": "Tower",
+          "phone_number": "1231231231",
+          "email": "Amika@gmail.com"
+      },
+      "work_order_number": 13617
+  },
+  {
+      "job_uid": "381ba190-7709-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_uid": "fb684bf0-6da2-11ee-ad52-fb5442a7fc06",
+          "customer_first_name": "arunkumar",
+          "customer_last_name": "101"
+      },
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "b495daea-d3d7-496c-bf0b-3327190ae1a5",
+                  "first_name": "Arun",
+                  "last_name": "kumar",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/prod.app.zuperpro/assets/profile_picture.jpg"
+              },
+              "team": {
+                  "team_uid": "335c25ef-c54a-43d3-9c88-7c62921e4da4",
+                  "team_name": "Maintanence"
+              }
+          }
+      ],
+      "job_title": "fan repair",
+      "job_category": {
+          "category_uid": "f5328700-9559-11ec-aba4-4d513227a15a",
+          "category_name": "Equipment Repair"
+      },
+      "job_priority": "MEDIUM",
+      "scheduled_start_time": "2023-10-31T09:45:18.000Z",
+      "scheduled_end_time": "2023-10-31T11:45:18.000Z",
+      "current_job_status": {
+          "status_uid": "a299a154-2525-4890-a2e9-1f9d9025115d",
+          "status_name": "New"
+      },
+      "customer_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "",
+          "first_name": "arunkumar",
+          "last_name": "101",
+          "phone_number": "9876554321",
+          "email": "arunkumar.r@zuper.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "600041",
+          "first_name": "Acme Inc.",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13616
+  },
+  {
+      "job_uid": "0b7b3920-7709-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_uid": "fb684bf0-6da2-11ee-ad52-fb5442a7fc06",
+          "customer_first_name": "arunkumar",
+          "customer_last_name": "101"
+      },
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "b495daea-d3d7-496c-bf0b-3327190ae1a5",
+                  "first_name": "Arun",
+                  "last_name": "kumar",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/prod.app.zuperpro/assets/profile_picture.jpg"
+              },
+              "team": {
+                  "team_uid": "335c25ef-c54a-43d3-9c88-7c62921e4da4",
+                  "team_name": "Maintanence"
+              }
+          }
+      ],
+      "job_title": "fan repair",
+      "job_category": {
+          "category_uid": "f5328700-9559-11ec-aba4-4d513227a15a",
+          "category_name": "Equipment Repair"
+      },
+      "job_priority": "MEDIUM",
+      "scheduled_start_time": "2023-10-31T09:45:18.000Z",
+      "scheduled_end_time": "2023-10-31T11:45:18.000Z",
+      "current_job_status": {
+          "status_uid": "a299a154-2525-4890-a2e9-1f9d9025115d",
+          "status_name": "New"
+      },
+      "customer_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "",
+          "first_name": "arunkumar",
+          "last_name": "101",
+          "phone_number": "9876554321",
+          "email": "arunkumar.r@zuper.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "600041",
+          "first_name": "Acme Inc.",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13615
+  },
+  {
+      "job_uid": "23a49af0-773b-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_last_name": "V",
+          "customer_email": "hello@sample.co",
+          "customer_first_name": "David",
+          "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba"
+      },
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "fea19530-406f-11e8-b99a-59f39b812a88",
+                  "first_name": "Henry",
+                  "last_name": "Jones",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/staging.in.pro.zuper/attachments/6c287db0-ff7c-11e7-b3a8-29b417a4f3fa/80894390-2125-11ee-9dcd-affe7f3e9b1d.jpg"
+              },
+              "team": {
+                  "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
+                  "team_name": "Team Android"
+              }
+          }
+      ],
+      "job_title": "Visit for 123 V33",
+      "job_category": {
+          "category_name": "Installation",
+          "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e"
+      },
+      "job_priority": "LOW",
+      "scheduled_start_time": "2023-10-30T14:09:00.000Z",
+      "scheduled_end_time": "2023-10-30T22:09:00.000Z",
+      "current_job_status": {
+          "status_uid": "79d1d7ad-30e5-4deb-bbd2-61d7fec4507d",
+          "status_name": "Sent to Service Provider"
+      },
+      "customer_address": {
+          "city": "New York",
+          "street": "Google, 8th Avenue",
+          "zip_code": "10011",
+          "first_name": "First",
+          "last_name": "Address",
+          "email": "hello@sample.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Salem",
+          "state": "Tamil Nadu",
+          "street": "Seelanaickenpatti",
+          "zip_code": "636201",
+          "first_name": "",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13619
+  },
+  {
+      "job_uid": "0a762890-7732-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_last_name": "V",
+          "customer_first_name": "Henry",
+          "customer_uid": "b5554b00-0593-11ec-adaf-cbc38b630fba"
+      },
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "fea19530-406f-11e8-b99a-59f39b812a88",
+                  "first_name": "Henry",
+                  "last_name": "Jones",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/staging.in.pro.zuper/attachments/6c287db0-ff7c-11e7-b3a8-29b417a4f3fa/80894390-2125-11ee-9dcd-affe7f3e9b1d.jpg"
+              },
+              "team": {
+                  "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
+                  "team_name": "Team Android"
+              }
+          }
+      ],
+      "job_title": "Visit for 123 V33",
+      "job_category": {
+          "category_name": "Home Cleaning",
+          "category_uid": "3fee25f0-74a1-11ea-8ca5-df1d176880cb"
+      },
+      "job_priority": "LOW",
+      "scheduled_start_time": "2023-10-30T13:04:00.000Z",
+      "scheduled_end_time": "2023-10-30T14:09:00.000Z",
+      "current_job_status": {
+          "status_uid": "cc47f5b9-862f-400a-a13f-40c63ca65e2b",
+          "status_name": "New"
+      },
+      "customer_address": {
+          "city": "New York",
+          "street": "Google, 8th Avenue",
+          "zip_code": "10011",
+          "first_name": "First",
+          "last_name": "Address",
+          "email": "hello@sample.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Salem",
+          "state": "Tamil Nadu",
+          "street": "Seelanaickenpatti",
+          "zip_code": "636201",
+          "first_name": "",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13618
+  },
+  {
+      "job_uid": "18ccec90-7731-11ee-af24-7515efe796bc",
+      "customer": null,
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "fea19530-406f-11e8-b99a-59f39b812a88",
+                  "first_name": "Henry",
+                  "last_name": "Jones",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/staging.in.pro.zuper/attachments/6c287db0-ff7c-11e7-b3a8-29b417a4f3fa/80894390-2125-11ee-9dcd-affe7f3e9b1d.jpg"
+              },
+              "team": {
+                  "team_uid": "beeb0c3c-bb1b-4e5d-90c1-b465f1a1ceb9",
+                  "team_name": "Team Android"
+              }
+          }
+      ],
+      "job_title": "Visit for Org ",
+      "job_category": {
+          "category_name": "Installation",
+          "category_uid": "c506e890-015e-11eb-99a8-e7fcc50f879e"
+      },
+      "job_priority": "LOW",
+      "scheduled_start_time": "2023-10-30T12:58:00.000Z",
+      "scheduled_end_time": "2023-10-30T20:58:00.000Z",
+      "current_job_status": {
+          "status_uid": "79d1d7ad-30e5-4deb-bbd2-61d7fec4507d",
+          "status_name": "Sent to Service Provider"
+      },
+      "work_order_number": 13617
+  },
+  {
+      "job_uid": "381ba190-7709-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_uid": "fb684bf0-6da2-11ee-ad52-fb5442a7fc06",
+          "customer_first_name": "arunkumar",
+          "customer_last_name": "101"
+      },
+      "prefix": "Q3_0001",
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "b495daea-d3d7-496c-bf0b-3327190ae1a5",
+                  "first_name": "Arun",
+                  "last_name": "kumar",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/prod.app.zuperpro/assets/profile_picture.jpg"
+              },
+              "team": {
+                  "team_uid": "335c25ef-c54a-43d3-9c88-7c62921e4da4",
+                  "team_name": "Maintanence"
+              }
+          }
+      ],
+      "job_title": "fan repair",
+      "job_category": {
+          "category_uid": "f5328700-9559-11ec-aba4-4d513227a15a",
+          "category_name": "Equipment Repair"
+      },
+      "job_priority": "MEDIUM",
+      "scheduled_start_time": "2023-10-31T09:45:18.000Z",
+      "scheduled_end_time": "2023-10-31T11:45:18.000Z",
+      "current_job_status": {
+          "status_uid": "a299a154-2525-4890-a2e9-1f9d9025115d",
+          "status_name": "New"
+      },
+      "customer_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "",
+          "first_name": "arunkumar",
+          "last_name": "101",
+          "phone_number": "9876554321",
+          "email": "arunkumar.r@zuper.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "600041",
+          "first_name": "Acme Inc.",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13616
+  },
+  {
+      "job_uid": "0b7b3920-7709-11ee-af24-7515efe796bc",
+      "customer": {
+          "customer_uid": "fb684bf0-6da2-11ee-ad52-fb5442a7fc06",
+          "customer_first_name": "arunkumar",
+          "customer_last_name": "101"
+      },
+      "assigned_to": [
+          {
+              "user": {
+                  "user_uid": "b495daea-d3d7-496c-bf0b-3327190ae1a5",
+                  "first_name": "Arun",
+                  "last_name": "kumar",
+                  "profile_picture": "https://s3.ap-south-1.amazonaws.com/prod.app.zuperpro/assets/profile_picture.jpg"
+              },
+              "team": {
+                  "team_uid": "335c25ef-c54a-43d3-9c88-7c62921e4da4",
+                  "team_name": "Maintanence"
+              }
+          }
+      ],
+      "job_title": "fan repair",
+      "job_category": {
+          "category_uid": "f5328700-9559-11ec-aba4-4d513227a15a",
+          "category_name": "Equipment Repair"
+      },
+      "job_priority": "MEDIUM",
+      "scheduled_start_time": "2023-10-31T09:45:18.000Z",
+      "scheduled_end_time": "2023-10-31T11:45:18.000Z",
+      "current_job_status": {
+          "status_uid": "a299a154-2525-4890-a2e9-1f9d9025115d",
+          "status_name": "New"
+      },
+      "customer_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "",
+          "first_name": "arunkumar",
+          "last_name": "101",
+          "phone_number": "9876554321",
+          "email": "arunkumar.r@zuper.co"
+      },
+      "customer_billing_address": {
+          "landmark": "",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "street": "WorkEZ Urban Square OMR - Managed Offices and Coworking Spaces, Elango Nagar, Perungudi",
+          "country": "",
+          "zip_code": "600041",
+          "first_name": "Acme Inc.",
+          "last_name": "",
+          "phone_number": "",
+          "email": ""
+      },
+      "work_order_number": 13615
+  }
+]
   
   // @ViewChild(MatPaginator) paginator: MatPaginator | any;
      // Extract the displayed column names
@@ -205,13 +696,120 @@ jobs =  [
   
 
   checkedItems: boolean[] = Array(this.columns.length).fill(false);
-
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer,private dialog: MatDialog){
+  currentRoutePath: string = '';
+  jobsData : any ;
+  jobsArray : any[] = [];
+  metaArray : any[] = [];
+  constructor(
+    private matIconRegistry: MatIconRegistry, 
+    private domSanitizer: DomSanitizer,
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private jobService: JobsService
+    ){
     this.matIconRegistry.addSvgIcon('custom_icon', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/funnel.svg'))
     console.log("Displayed Columns:",this.displayedColumns)
     console.log("Data:",this.columns)
     console.log("Jobs:",this.jobs)
+    this.currentRoutePath = this.getCurrentRoutePath();
+    // alert(this.currentRoutePath)
 
+  }
+
+  getJobs(type:any){
+    this.jobService
+    .getJobs(type)
+    .pipe(
+      catchError((error) => {
+        console.error('API error:', error); // Log full error details
+        // Attempt to parse and handle syntax errors here
+        console.log(error.status);
+        if (error.status == 200) {
+          //if this condition is working , which means the API is fine but the problem in Response
+          // console.log(error.error.text)
+          // we need to validate the response is a proper json
+          try {
+            const parsedData = JSON.parse(error.error.text);
+            // If parsing succeeded, handle parsed data
+            return parsedData;
+          } catch (parseError) {
+            // Handle parsing failure
+
+            return this.jobService.validateJson(error.error.text);
+          }
+        }
+        if(error.status == 429 ){
+          console.log("The Limit is Reached!")
+          this.getJobs('local')
+        }
+        throw error; // Re-throw to display default error message if needed
+      }),
+      switchMap((data) => {
+        // Handle successful response or validated JSON
+        // console.log({ data });
+        return of(data); // This line is optional, return data as needed
+      })
+    )
+    .subscribe(
+      (jobsData:any) => {
+        // This block handles the final data after successful response or validated JSON
+        console.log({ jobsData });
+        this.jobsData = jobsData;
+        this.jobsArray = jobsData['data']
+      },
+      (subscribeError) => {
+        // Handle subscription error if needed
+        console.error('Subscription error:', subscribeError);
+      }
+    );
+  }
+
+  getJobsMeta(type:any){
+    this.jobService
+    .getJobsMeta(type)
+    .pipe(
+      catchError((error) => {
+        console.error('API error:', error); // Log full error details
+        // Attempt to parse and handle syntax errors here
+        console.log(error.status);
+        if (error.status == 200) {
+          //if this condition is working , which means the API is fine but the problem in Response
+          // console.log(error.error.text)
+          // we need to validate the response is a proper json
+          try {
+            const parsedData = JSON.parse(error.error.text);
+            // If parsing succeeded, handle parsed data
+            return parsedData;
+          } catch (parseError) {
+            // Handle parsing failure
+
+            return this.jobService.validateJson(error.error.text);
+          }
+        }
+        if(error.status == 429 ){
+          //If the limit is reached , we can use local json file - which is in asset directory
+          console.log("The Limit is Reached!")
+          this.getJobsMeta('local')
+        }
+        throw error; // Re-throw to display default error message if needed
+      }),
+      switchMap((data) => {
+        // Handle successful response or validated JSON
+        console.log({ data });
+        return of(data); // This line is optional, return data as needed
+      })
+    )
+    .subscribe(
+      (metaData:any) => {
+        // This block handles the final data after successful response or validated JSON
+        console.log({ metaData });
+        this.metaArray = metaData
+      },
+      (subscribeError) => {
+        // Handle subscription error if needed
+        console.error('Subscription error:', subscribeError);
+      }
+    );
   }
 
   openPopoverModal() {
@@ -248,7 +846,32 @@ jobs =  [
 
   checkValue(job: any,column: any,i:number): any {
 
-    console.log({job,i,column})
+    // console.log({job,i,column});
+
+    if(column.display_type == "customer"){
+      // console.log(column.combine_column)
+      if(column.combine_column){
+        return job['customer'] ? job['customer'].customer_first_name +' '+ job['customer'].customer_last_name : null
+      }
+    }
+    if(column.display_type == "title"){
+      // console.log(column.combine_column)
+      if(column.combine_column){
+        return (job.prefix ? job.prefix : '' )  +' '+ job.job_title
+      }
+    }
+
+
+    if(column.display_type == "string"){
+      // console.log(column.combine_column)
+        return job.job_category.category_name
+    }
+
+    if(column.display_type == "badge"){
+      // console.log(job.current_job_status.status_name)
+        return job.current_job_status.status_name
+    }
+
   }
 
   loadPageData() {
@@ -261,16 +884,21 @@ jobs =  [
       const endIndex = startIndex + pageSize;
       setTimeout(() => {
         const dataSlice: any[] = this.jobs!.slice();
-    
+
         this.dataSource.data = dataSlice;
         console.log("Data loaded for page", pageIndex + 1);
       });
-      
+
     // });
   }
 
   applyFilter(ev:any){
-    console.log({ev})
+    // console.log({ev})
+    const filterValue = (ev.target as HTMLInputElement).value;
+    console.log({filterValue})
+    console.log(filterValue.trim().toLowerCase())
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log("DataSource:",this.dataSource)
   }
 
   clearFilter(){
@@ -298,6 +926,23 @@ jobs =  [
       //      length: this.paginator.length
       //    });
     }
+  }
+
+  getCurrentRoutePath(): string {
+    let route = this.route;
+    
+    // Traverse the route hierarchy to get the complete route path
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+
+    // Access the activated route snapshot to get the URL segments
+    const segments = route.snapshot.url.map(segment => segment.path);
+
+    // Join the URL segments to get the complete route path
+    const path = segments.join('/');
+
+    return `${path}`; // Assuming you want to start with a leading slash
   }
 
   

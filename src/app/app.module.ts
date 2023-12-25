@@ -26,6 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { PopoverModalComponent } from './popover-modal/popover-modal.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
 // import {  } from '@angular/material'
 
 @NgModule({
@@ -56,7 +57,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatButtonModule,
     DragDropModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -91,3 +91,49 @@ mat-cell {
   min-height: 60px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+
+       /* Style for the container div */
+       .content-container {
+        display: flex;
+        align-items: center;
+        max-width: 600px; /* Adjust the max-width as needed */
+        margin: 0 auto;
+        /* padding: 20px; */
+        border: 1px solid #ddd; /* Optional: Add a border for better visualization */
+    }
+
+    /* Style for the image */
+    .content-container img {
+        max-width: 100%;
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+        margin-right: 0px; /* Adjust the margin as needed */
+    }
+
+    /* Style for the title and subtitle */
+    .text-container {
+        flex: 1;
+    }
+
+    /* Optional: Style for the title */
+    .text-container h2 {
+        font-size: 1.5em;
+        /* margin-bottom: 10px; */
+    }
+
+    /* Optional: Style for the subtitle */
+    .text-container p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    .example-icon {
+      padding: 0 14px;
+    }
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+
+
+
+
