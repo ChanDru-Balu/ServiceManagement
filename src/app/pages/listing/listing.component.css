@@ -27,14 +27,58 @@ mat-cell {
   color: #182032;
 }
 
+
 .mat-mdc-form-field-flex{
   background-color: #fff;
 }
 
-.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+/* .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
   padding: 2px 14px;
   min-height: 29px;
+} */
+
+.filter-container {
+  background-color: #ffffff;
+  border: solid 2px black;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 34px;
+  margin-top: 16px;
+  padding: 5px;
 }
+
+.search-field {
+  background-color: #ffffff;
+  /* height: 29px;  */
+  margin: 0 ;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field-wrapper {
+  height: 100%; /* Ensure the wrapper takes full height */
+}
+
+/* .search-block{
+  width: 0%;
+  right: 0;
+  @extend header;
+  background: #fff;
+  &.active{
+    width: 100%;
+  } */
+  .search-control{
+    flex: 1;
+    font-size: 1rem;
+    border: 0;
+    outline: none;
+    padding-left: 10px;
+  }
+
+
 
 
 

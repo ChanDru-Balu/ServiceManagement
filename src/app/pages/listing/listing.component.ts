@@ -399,6 +399,7 @@ metaArray : any[] = [];
 
   clearFilter(){
     this.filterText="";
+    this.updateDataSource()
   }
 
   onChangedPageSize(ev:any){

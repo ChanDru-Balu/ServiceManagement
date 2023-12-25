@@ -26,6 +26,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
   
+    
     <div
       style="
         background-color: #f1f5f9;
@@ -34,7 +35,26 @@
         min-height: 29px;
       "
     >
-      <mat-form-field
+
+    <div class="filter-container">
+        <button class="search-icon" mat-icon-button disabled>
+            <mat-icon>search</mat-icon>
+          </button>
+          <input class="search-control" type="text" placeholder="Search"  #searchbar matInput
+          (keyup)="applyFilter($event)"
+          placeholder="ID/Title/Zipcode..."
+          [(ngModel)]="filterText" />
+          <button mat-icon-button  matSuffix
+          [ngStyle]="
+            filterText ? { visibility: 'visible' } : { visibility: 'hidden' }
+          "
+          (click)="clearFilter()"
+          style="margin-left: 5px">
+            <mat-icon>close</mat-icon>
+          </button> 
+      </div>
+      
+      <!-- <mat-form-field
         appearance="outline"
         style="
           padding: 0;
@@ -51,13 +71,7 @@
           (keyup)="applyFilter($event)"
           placeholder="ID/Title/Zipcode..."
           [(ngModel)]="filterText"
-          style="
-            background-color: #ffffff;
-            flex: 1;
-            padding: 2px 5px;
-            border: none;
-            outline: none;
-          "
+    
         />
         <button
           style="margin-right: 5px"
@@ -70,8 +84,12 @@
         >
           <mat-icon>cancel</mat-icon>
         </button>
-      </mat-form-field>
+      </mat-form-field> -->
   
+
+
+
+
       <div style="display: flex; align-items: center; padding: 15px">
         <button
           mat-stroked-button

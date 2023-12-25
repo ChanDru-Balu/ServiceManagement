@@ -36,6 +36,29 @@ mat-cell {
   min-height: 29px;
 }
 
+.filter-container {
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.search-field {
+  background-color: #ffffff;
+  height: 29px; /* Set the height */
+  margin: 0 15px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field-wrapper {
+  height: 100%; /* Ensure the wrapper takes full height */
+}
+
+
+
 
 
 /* Drag And Drop */
