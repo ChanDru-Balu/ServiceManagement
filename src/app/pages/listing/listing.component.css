@@ -1,20 +1,137 @@
-:host .mat-paginator .mat-paginator-container{
-    justify-content: flex-start !important;
-  }
+table {
+  width: 100%;
+}
 
-  mat-header-row{
-    background-color: #f8fafc;
-  }
+.mat-table {
+  overflow-x: scroll;
+}
 
-  mat-header-cell{
-    color:#64748b
-  }
+mat-header-row {
+  background-color: #f8fafc;
+}
 
-  ::ng-deep .hide-arrow .mat-sort-header-arrow {
-    color: #64748b;
- }
+.mat-mdc-table .mdc-data-table__header-row {
+  background-color: #f8fafc;
+}
+
+mat-header-cell {
+  color: #64748b;
+}
+
+::ng-deep .hide-arrow .mat-sort-header-arrow {
+  color: #64748b;
+}
 
 mat-cell {
-    background-color: #ffffff;
-    color: #182032;
+  background-color: #ffffff;
+  color: #182032;
 }
+
+.mat-mdc-form-field-flex{
+  background-color: #fff;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding: 2px 14px;
+  min-height: 29px;
+}
+
+
+
+/* Drag And Drop */
+
+.example-list {
+  width: 500px;
+  max-width: 100%;
+  border: solid 1px #ccc;
+  min-height: 60px;
+  display: block;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-custom-placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 60px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+       /* Style for the container div */
+       .content-container {
+        display: flex;
+        align-items: center;
+        max-width: 600px; /* Adjust the max-width as needed */
+        margin: 0 auto;
+        /* padding: 20px; */
+        border: 1px solid #ddd; /* Optional: Add a border for better visualization */
+    }
+
+    /* Style for the image */
+    .content-container img {
+        max-width: 100%;
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+        margin-right: 0px; /* Adjust the margin as needed */
+    }
+
+    /* Style for the title and subtitle */
+    .text-container {
+        flex: 1;
+    }
+
+    /* Optional: Style for the title */
+    .text-container h2 {
+        font-size: 1.5em;
+        /* margin-bottom: 10px; */
+    }
+
+    /* Optional: Style for the subtitle */
+    .text-container p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    .example-icon {
+      padding: 0 14px;
+    }
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+
+    

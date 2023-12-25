@@ -91,7 +91,13 @@ export class PopoverModalComponent {
 
   onSubmit() {
     // Close the dialog and pass the result (e.g., selected items)
-    this.dialogRef.close({ result: 'submit', selectedItems: this.columns });
+    if (this.columns) {
+      console.log('Columns:',this.columns);
+      this.dialogRef.close({ result: 'submit', selectedItems: this.columns });
+    } else {
+      console.error('Columns is undefined or null.');
+    }
+  
   }
 
   onCancel() {
