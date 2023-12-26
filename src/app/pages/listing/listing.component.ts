@@ -1,7 +1,7 @@
 import {SelectionModel} from '@angular/cdk/collections';
 import {AfterViewInit, Component,ViewChild, ViewEncapsulation} from '@angular/core';
 import { catchError, of, switchMap } from 'rxjs';
-import { JobsService } from 'src/app/services/jobs.service';
+import { JobsService } from '../../services/jobs.service';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator'
@@ -12,7 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
-import { PopoverModalComponent } from 'src/app/popover-modal/popover-modal.component';
+import { PopoverModalComponent } from '../../popover-modal/popover-modal.component';
 import { ActivatedRoute } from '@angular/router';
 
 
