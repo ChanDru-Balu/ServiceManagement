@@ -379,7 +379,7 @@ metaArray : any[] = [];
       const startIndex = pageIndex * pageSize;
       const endIndex = startIndex + pageSize;
       setTimeout(() => {
-        const dataSlice: any[] = this.jobs!.slice();
+        const dataSlice: any[] = this.jobsArray!.slice();
 
         this.dataSource.data = dataSlice;
         console.log("Data loaded for page", pageIndex + 1);
