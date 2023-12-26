@@ -324,8 +324,8 @@ metaArray : any[] = [];
 
  ngOnInit() {
 
-    this.getJobs('local')
-    this.getJobsMeta('local')
+    this.getJobs('online')
+    this.getJobsMeta('online')
 
     this.dataSource.paginator = this.paginator;
   }
