@@ -32,7 +32,7 @@
             "display_type": "assignment",
             "is_sortable": false,
             "checked": true
-        },
+        },        
         {
             "display_name": "Scheduled Date",
             "data_key": "scheduled_start_time",
